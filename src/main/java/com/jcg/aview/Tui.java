@@ -28,7 +28,9 @@ public class Tui {
 		if(!controller.inputLine(fileName)){
 			inputLine();
 		} else{
+			controller.checkInput();
 			controller.writeFile();
+			
 		}
 		
 	}

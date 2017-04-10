@@ -2,13 +2,16 @@ package com.jcg.controller;
 
 import java.util.List;
 
+import com.jcg.Config;
 import com.jcg.model.Artikel;
 import com.jcg.util.CsvFileReader;
 import com.jcg.util.CsvFileWriter;
 
 public class Controller {
 	
-	private List<Artikel> artikelListe;
+	private List<Artikel> artikeListeKorrektEbay;
+	private List<Artikel> artikelListeShop;
+	private List<Artikel> artikelListeFalsch;
 	private CsvFileReader csvFileReader;
 	private CsvFileWriter csvFileWriter;
 	private String oldFile;
@@ -18,7 +21,7 @@ public class Controller {
 
 	public Controller(List<Artikel> artikelListe, CsvFileReader csvFileReader, CsvFileWriter csvFileWriter) {
 		super();
-		this.artikelListe = artikelListe;
+		this.artikeListeKorrektEbay = artikelListe;
 		this.csvFileReader = csvFileReader;
 		this.csvFileWriter = csvFileWriter;
 	}
@@ -40,16 +43,16 @@ public class Controller {
 	}
 
 	public List<Artikel> getArtikelListe() {
-		return artikelListe;
+		return artikeListeKorrektEbay;
 	}
 
 	public void setArtikelListe(List<Artikel> artikelListe) {
-		this.artikelListe = artikelListe;
+		this.artikeListeKorrektEbay = artikelListe;
 	}
 
 	public Controller(List<Artikel> artikelListe) {
 		super();
-		this.artikelListe = artikelListe;
+		this.artikeListeKorrektEbay = artikelListe;
 	}
 
 	public Controller() {
@@ -58,8 +61,8 @@ public class Controller {
 	
 	public Boolean inputLine(String fileName){
 		this.oldFile=fileName;
-		this.artikelListe=csvFileReader.readCsvFile(fileName);
-		if(artikelListe==null)
+		this.artikeListeKorrektEbay=csvFileReader.readCsvFile(fileName);
+		if(artikeListeKorrektEbay==null)
 			return false;
 		else
 			return true;
@@ -67,8 +70,18 @@ public class Controller {
 	
 	public void writeFile(){
 		newFile=oldFile.replaceFirst(".csv", "NEU.csv");
-		csvFileWriter.writeCsvFile(artikelListe, newFile);
+		csvFileWriter.writeCsvFile(artikeListeKorrektEbay, newFile);
 		
+	}
+	
+	public void checkInput(){
+		
+	}
+	
+	private Boolean checkArtikel(Artikel artikel){
+		Boolean artikelNr=artikel.druck_pseudonym.matches(Config.ebayNummern)||artikel.druck_pseudonym.matches(Config.shopNummern);
+		Boolean lager_platz=artikel.lager_fach.matches(Config.lagerPlätze);
+		return artikelNr && lager_platz;
 	}
 	
 	
