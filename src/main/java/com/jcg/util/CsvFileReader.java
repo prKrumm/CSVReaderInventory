@@ -56,7 +56,7 @@ public class CsvFileReader {
 		} catch (Exception e) {
 			System.out.println("Error in CsvFileReader !!!");
 			System.out.println(fileName+" is not a directory\n try again!");
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 	}

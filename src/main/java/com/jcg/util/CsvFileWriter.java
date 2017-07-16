@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.QuoteMode;
 
 import com.jcg.Config;
 import com.jcg.model.Artikel;
@@ -24,9 +25,9 @@ public class CsvFileWriter {
 	private static final Object[] FILE_HEADER = { Config.ARTIKEL_ID, Config.ARTIKEL_LAGERFACH };
 
 	public void writeCsvFile(List<Artikel> artikelList,String fileNeu) {
-
+		
 		// Create the CSVFormat object with "\n" as a record delimiter
-		CSVFormat csvFileFormat = CSVFormat.newFormat(Config.SEPERATOR).withQuote(Config.QUOTECHAR).withRecordSeparator(NEW_LINE_SEPARATOR);
+		CSVFormat csvFileFormat = CSVFormat.newFormat(Config.SEPERATOR).withQuote(Config.QUOTECHAR).withRecordSeparator(NEW_LINE_SEPARATOR).withQuoteMode(QuoteMode.ALL);
 		
 		try (// initialize FileWriter object
 				

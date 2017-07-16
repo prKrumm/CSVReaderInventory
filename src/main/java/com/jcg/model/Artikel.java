@@ -8,6 +8,10 @@ public class Artikel {
 		this.druck_pseudonym = druck_pseudonym;
 		this.lager_fach = lager_fach;
 	}
+	@Override
+	public String toString() {
+		return "Artikel [druck_pseudonym=" + druck_pseudonym + ", lager_fach=" + lager_fach + "]";
+	}
 	
 	
 

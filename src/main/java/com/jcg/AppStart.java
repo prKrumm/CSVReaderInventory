@@ -14,7 +14,7 @@ import com.jcg.util.CsvFileWriter;
  * @author ashraf
  *
  */
-public class CsvWriteReadTest {
+public class AppStart {
 
 	/**
 	 * @param args

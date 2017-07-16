@@ -30,7 +30,7 @@ public class Tui {
 		} else{
 			controller.checkInput();
 			controller.writeFile();
-			
+			//controller.sendToServer();
 		}
 		
 	}
